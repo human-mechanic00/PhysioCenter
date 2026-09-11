@@ -1,6 +1,6 @@
 {
   "name": "physio-center",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "برنامج إدارة مراكز العلاج الطبيعي - محلي وبدون إنترنت",
   "main": "main.js",
   "scripts": {

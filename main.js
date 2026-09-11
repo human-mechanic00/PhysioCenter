@@ -14,13 +14,18 @@ function createWindow(){
   mainWindow = new BrowserWindow({width:1400,height:900,minWidth:1100,minHeight:700,
     webPreferences:{preload:path.join(__dirname,'preload.js'),contextIsolation:true,nodeIntegration:false},
     backgroundColor:'#f5f7fb',title:'Physio Center'});
-  mainWindow.loadFile(path.join(__dirname,'pages','login.html'));
+  mainWindow.loadFile(path.join(__dirname,'pages','dashboard.html'));
 }
 function register(channel, fn){ ipcMain.removeHandler(channel); ipcMain.handle(channel, fn); }
 
-app.whenReady().then(()=>{
+app.whenReady().then(async()=>{
   const dataDir=path.join(app.getPath('userData'),'data'); fs.mkdirSync(dataDir,{recursive:true});
   dbFile=path.join(dataDir,'physio-center.db'); db=new Database(dbFile);
+  await db.ready;
+  const doctors = await db.listUsers();
+  const doctor = doctors.find(u=>u.role==='doctor' && u.active);
+  if (doctor) currentUser = doctor;
+  else currentUser = {id:1, username:'doctor', role:'doctor'};
 
   register('login', async (_,c)=>{ const r=await db.login(c.username,c.password); if(r.ok) currentUser=r.user; return r; });
   register('logout',()=>{currentUser=null;return ok();});
@@ -54,6 +59,8 @@ app.whenReady().then(()=>{
   register('users:toggle',(_,id)=>requireRole('doctor')?db.toggleUser(id,currentUser.id):deny());
   register('users:change-password',(_,id,pw)=>requireRole('doctor')?db.changePassword(id,pw,currentUser.id):deny());
   register('audit:list',()=>requireRole('doctor')?db.getAuditLogs():deny());
+  register('app:update-download',async()=>{ try{ await autoUpdater.downloadUpdate(); return {ok:true}; }catch(e){ return {ok:false,message:e.message}; }});
+  register('app:update-install',()=>{ try{ autoUpdater.quitAndInstall(false,true); return {ok:true}; }catch(e){ return {ok:false,message:e.message}; }});
 
   register('backup:create',async()=>{
     if(!requireRole('doctor')) return deny();
