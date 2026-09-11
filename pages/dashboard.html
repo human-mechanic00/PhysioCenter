@@ -1,0 +1,33 @@
+<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Physio Center</title><link rel="stylesheet" href="../css/style.css"></head><body><header class="topbar"><div><strong>🏥 Physio Center</strong><span id="roleBadge" class="badge"></span></div><button id="logout" class="ghost">تسجيل الخروج</button></header><div class="layout"><aside class="sidebar"><button class="nav active" data-go="dashboard">🏠 الرئيسية</button><button class="nav" data-go="patients">👥 المرضى</button><button class="nav" data-go="appointments">📅 المواعيد</button><button class="nav" data-go="patient">📝 ملف المريض</button><button class="nav" data-go="feedback">⭐ تقييمات المرضى</button><div class="sep"></div><button class="nav doctor-only" data-go="finance">💰 الحسابات</button><button class="nav doctor-only" data-go="reports">📊 التقارير</button><button class="nav doctor-only" data-go="settings">⚙️ الإعدادات</button><button class="nav doctor-only" data-go="users">👤 المستخدمون</button><button class="nav doctor-only" data-go="backup">💾 النسخ الاحتياطي</button><button class="nav doctor-only" data-go="audit">🛡️ سجل التعديلات</button></aside><main class="content"><section id="dashboardView"><div class="page-head"><div><h1>لوحة التحكم</h1><p class="muted">نظرة سريعة على المركز</p></div></div><div id="cards" class="cards"></div><div class="panel"><h2>ابدأ العمل</h2><p class="muted">يمكنك تسجيل مريض جديد أو الانتقال للمواعيد وملفات المرضى.</p><button class="primary" onclick="location.href='patients.html'">+ إدارة المرضى</button></div></section></main></div><script>const u=JSON.parse(sessionStorage.getItem('physioUser')||'null');if(!u)location.href='login.html';roleBadge.textContent=u.role==='doctor'?'الدكتور':'المركز';if(u.role!=='doctor')document.querySelectorAll('.doctor-only').forEach(x=>x.style.display='none');document.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>{const p={patients:'patients.html',appointments:'appointments.html',patient:'patients.html',feedback:'feedback.html',finance:'finance.html',reports:'reports.html',settings:'settings.html',users:'users.html',backup:'backup.html',audit:'audit.html'}[b.dataset.go];if(p)location.href=p});logout.onclick=async()=>{await window.physio.logout();sessionStorage.clear();location.href='login.html'};(async()=>{const r=await window.physio.dashboard();if(!r.ok)return;const d=r.data;const a=[['👥','إجمالي المرضى',d.patients],['📅','مواعيد اليوم',d.todayAppointments],['📝','جلسات اليوم',d.todaySessions]];if(u.role==='doctor')a.push(['💵','إيراد اليوم',d.todayRevenue+' جنيه'],['📈','إيراد الشهر',d.monthRevenue+' جنيه'],['💸','مصروفات الشهر',d.monthExpenses+' جنيه']);cards.innerHTML=a.map(x=>`<div class="stat"><div class="stat-icon">${x[0]}</div><div><div class="muted">${x[1]}</div><strong>${x[2]}</strong></div></div>`).join('')})();</script>
+<div id="physio-update-banner" style="display:none;position:fixed;left:20px;right:20px;bottom:20px;z-index:9999;background:#fff;border:1px solid #dbe4ea;border-radius:14px;padding:16px;box-shadow:0 12px 30px rgba(0,0,0,.15);direction:rtl;">
+  <strong>🆕 تحديث جديد متاح</strong>
+  <span id="physio-update-text" style="margin:0 12px;"></span>
+  <button id="physio-update-btn">تحديث البرنامج</button>
+  <button id="physio-update-later">لاحقًا</button>
+</div>
+<script>
+(function(){
+  if (!window.physio || !window.physio.appUpdater) return;
+  const b=document.getElementById('physio-update-banner');
+  const t=document.getElementById('physio-update-text');
+  const btn=document.getElementById('physio-update-btn');
+  const later=document.getElementById('physio-update-later');
+  window.physio.appUpdater.onUpdateAvailable((info)=>{
+    t.textContent='الإصدار '+(info.version||'الجديد')+' متاح.';
+    b.style.display='block';
+  });
+  btn.onclick=async()=>{
+    btn.disabled=true; btn.textContent='جاري تنزيل التحديث...';
+    try { await window.physio.appUpdater.download(); }
+    catch(e){ btn.disabled=false; btn.textContent='إعادة المحاولة'; }
+  };
+  window.physio.appUpdater.onUpdateDownloaded(()=>{
+    btn.disabled=false; btn.textContent='تثبيت وإعادة التشغيل';
+    btn.onclick=()=>window.physio.appUpdater.install();
+    t.textContent='تم تنزيل التحديث. أعد تشغيل البرنامج لتثبيته.';
+  });
+  later.onclick=()=>b.style.display='none';
+})();
+</script>
+
+</body></html>

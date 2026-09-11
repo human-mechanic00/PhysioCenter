@@ -1,0 +1,2 @@
+async function guard(doctor=false){const u=JSON.parse(sessionStorage.getItem('physioUser')||'null');if(!u){location.href='login.html';return null}if(doctor&&u.role!=='doctor'){document.body.innerHTML='<main class="content full"><div class="panel"><h2>غير مسموح</h2><p>هذه الصفحة متاحة للدكتور فقط.</p><button class="primary" onclick="location.href=\'dashboard.html\'">العودة للرئيسية</button></div></main>';return null}return u}
+function esc(v){return String(v??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}

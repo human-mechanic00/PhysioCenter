@@ -1,0 +1,70 @@
+{
+  "name": "physio-center",
+  "version": "1.0.0",
+  "description": "برنامج إدارة مراكز العلاج الطبيعي - محلي وبدون إنترنت",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder --win nsis",
+    "dist": "npm install && npm run build",
+    "release": "electron-builder --win nsis --publish always"
+  },
+  "dependencies": {
+    "sqlite3": "^5.1.7",
+    "electron-updater": "^6.6.2"
+  },
+  "devDependencies": {
+    "electron": "^37.0.0",
+    "electron-builder": "^26.0.12"
+  },
+  "productName": "PhysioCenter",
+  "build": {
+    "appId": "com.physiocenter.app",
+    "productName": "PhysioCenter",
+    "asar": true,
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "**/*",
+      "!dist/**",
+      "!*.zip"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "artifactName": "PhysioCenter-Setup-${version}.${ext}"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "PhysioCenter",
+      "installerLanguages": [
+        "ar"
+      ],
+      "language": "1025",
+      "installerSidebar": "build/installer-sidebar.bmp",
+      "installerHeader": "build/installer-header.bmp",
+      "uninstallerSidebar": "build/installer-sidebar.bmp",
+      "include": "build/installer.nsh",
+      "deleteAppDataOnUninstall": false
+    },
+    "icon": "build/icon.ico",
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "human-mechanic00",
+        "repo": "PhysioCenter"
+      }
+    ],
+    "artifactName": "PhysioCenter-Setup-${version}.${ext}"
+  }
+}

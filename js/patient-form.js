@@ -1,0 +1,1 @@
+document.getElementById('form').onsubmit=async e=>{e.preventDefault();const d=Object.fromEntries(new FormData(e.target));const r=await window.api.addPatient(d);document.getElementById('msg').innerHTML=`<div class="success">تم إنشاء الملف رقم ${String(r.id).padStart(5,'0')}</div><button onclick="location.href='patient.html?id=${r.id}'">فتح الملف</button>`;e.target.reset()};
