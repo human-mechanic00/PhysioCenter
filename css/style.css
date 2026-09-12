@@ -2,3 +2,65 @@
 
 /* V6 professional polish */
 h1,h2{margin-top:0}.topbar h1{margin:0;font-size:22px}.page-head h2{margin:0}.patient-chip{padding:10px 14px;border-radius:12px;background:#edf3ff;color:#1769e0;font-weight:bold}.progress-meta{display:flex;justify-content:space-between;margin:8px 0}.progress{height:12px;background:#edf0f5;border-radius:20px;overflow:hidden}.progress>div{height:100%;background:#1769e0;border-radius:20px}.mini-stats{display:flex;gap:20px;flex-wrap:wrap;margin-top:12px;color:#5d687b}.status-pill{display:inline-block;padding:4px 9px;border-radius:999px;background:#eef3f9;color:#526174;font-size:12px}.session-head{display:flex;gap:14px;align-items:center;flex-wrap:wrap;padding-bottom:10px}.session-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.session-grid>div{padding:10px;border-radius:10px;background:#f8fafc}.session-grid p{white-space:pre-wrap}.compact-form{margin-top:16px;padding-top:16px;border-top:1px solid #edf0f5}.report-line{display:flex;justify-content:space-between;padding:14px 0;border-bottom:1px solid #edf0f5}.toolbar{align-items:end}.toolbar label{flex:1}@media print{body{background:#fff}.sidebar,.topbar button,.actions button,#editBtn,#patientForm,#plan,#sess,#exercise,.toolbar{display:none!important}.content{padding:0}.panel,.stat{box-shadow:none;border:1px solid #ddd;break-inside:avoid}.medical-alert{break-inside:avoid}.grid2{grid-template-columns:1fr 1fr}.session-grid{grid-template-columns:1fr 1fr}}@media(max-width:850px){.session-grid{grid-template-columns:1fr}.mini-stats{gap:10px}.topbar{height:auto;min-height:72px;padding:14px}.toolbar{flex-direction:column;align-items:stretch}}
+
+/* PhysioCenter v1.0.2 visual redesign */
+:root{--pc-primary:#0f766e;--pc-primary-dark:#115e59;--pc-accent:#14b8a6;--pc-bg:#f0f6f7;--pc-card:#ffffff;--pc-text:#15323a;--pc-muted:#66808a;--pc-border:#d8e7e9;--pc-shadow:0 10px 28px rgba(18,63,70,.08)}
+body{background:var(--pc-bg);color:var(--pc-text)}
+.topbar{background:linear-gradient(135deg,#0f4c5c,#0f766e);color:#fff;border-bottom:0;box-shadow:0 4px 18px rgba(15,76,92,.16)}
+.topbar strong{font-size:21px;letter-spacing:.2px}.topbar .muted,.topbar .badge{color:#fff}.badge{background:rgba(255,255,255,.16);margin-right:10px}.top-status{font-size:13px;background:rgba(255,255,255,.13);padding:8px 12px;border-radius:999px}
+.layout{min-height:calc(100vh - 72px)}
+.sidebar{background:#123f4a;border-left:0;padding:20px 14px;box-shadow:8px 0 25px rgba(11,50,58,.10)}
+.nav{color:#d8eef0;background:transparent;border:0;border-radius:12px;padding:12px 14px;font-weight:700;transition:.18s}.nav:hover{background:rgba(255,255,255,.08);color:#fff;transform:translateX(-2px)}.nav.active{background:linear-gradient(90deg,#14b8a6,#0f766e);color:#fff;box-shadow:0 8px 18px rgba(20,184,166,.22)}.sep{background:rgba(255,255,255,.13)}
+.content{padding:28px}.content.full{max-width:1320px}
+h1,h2,h3{color:var(--pc-text)}.muted{color:var(--pc-muted)}
+.panel,.stat{background:var(--pc-card);border:1px solid var(--pc-border);border-radius:18px;box-shadow:var(--pc-shadow)}
+.panel{padding:22px}.stat{padding:20px}.stat strong{color:var(--pc-text)}
+.stat-icon{width:50px;height:50px;display:grid;place-items:center;border-radius:14px;background:#e5f6f4;font-size:25px}
+button{border-color:#cbdfe2;background:#fff;color:#24434b;font-weight:700;transition:.18s}button:hover{border-color:#8fc9c6;box-shadow:0 5px 14px rgba(20,80,88,.08);transform:translateY(-1px)}button.primary{background:linear-gradient(135deg,#0f766e,#0d9488);border-color:#0f766e;color:#fff;box-shadow:0 7px 16px rgba(15,118,110,.18)}button.primary:hover{background:linear-gradient(135deg,#115e59,#0f766e)}
+input,select,textarea{border-color:#cfe0e3;background:#fbfefe;color:var(--pc-text)}input:focus,select:focus,textarea:focus{outline:0;border-color:#14a79b;box-shadow:0 0 0 3px rgba(20,184,166,.12)}
+.patient-chip{background:#e2f5f2;color:#0f766e}.progress{background:#dcebed}.progress>div{background:linear-gradient(90deg,#14b8a6,#0f766e)}.status-pill{background:#e8f4f3;color:#0f766e;font-weight:700}.session-grid>div,.info-grid>div{background:#f7fbfb;border-color:#deebed}.alert-box,.medical-alert{background:#fff7ed;border-color:#fed7aa;color:#9a3412}
+.table-wrap table{background:#fff;border-radius:14px;overflow:hidden}.table-wrap thead{background:#eef7f7}.table-wrap th{color:#315861;font-weight:800}.table-wrap tr:hover td{background:#f7fbfb}
+.page-head{margin-bottom:22px}.page-head h1,.page-head h2{margin-bottom:4px}.toolbar{background:transparent}
+.back-button{position:fixed;left:22px;bottom:22px;z-index:1000;background:#123f4a;color:#fff;border:0;border-radius:999px;padding:11px 18px;box-shadow:0 10px 25px rgba(18,63,74,.22)}.back-button:hover{background:#0f766e;color:#fff}
+.login{background:linear-gradient(135deg,#0b3b49,#0f766e)}
+@media(max-width:850px){.sidebar{width:190px}.content{padding:18px}.back-button{left:14px;bottom:14px}}
+
+
+
+/* PhysioCenter v1.0.3 — Navy / Cyan brand palette inspired by the installer identity */
+:root{
+  --pc-navy:#06283d;
+  --pc-navy-2:#0b3a55;
+  --pc-cyan:#11b8e6;
+  --pc-cyan-2:#0aa7d5;
+  --pc-bg:#eef3f6;
+  --pc-card:#ffffff;
+  --pc-text:#123044;
+  --pc-muted:#6c7f8b;
+  --pc-border:#dce5ea;
+  --pc-shadow:0 10px 28px rgba(6,40,61,.09);
+}
+body{background:var(--pc-bg);color:var(--pc-text)}
+.topbar{background:linear-gradient(135deg,var(--pc-navy),var(--pc-navy-2));color:#fff;box-shadow:0 5px 20px rgba(6,40,61,.18)}
+.topbar strong{color:#fff}.topbar .muted,.topbar .badge{color:#fff}.badge{background:rgba(17,184,230,.16)}
+.top-status{background:rgba(255,255,255,.10)}
+.sidebar{background:linear-gradient(180deg,#06283d,#0a344c);box-shadow:8px 0 25px rgba(6,40,61,.14)}
+.nav{color:#d9edf5}.nav:hover{background:rgba(17,184,230,.12);color:#fff;transform:translateX(-2px)}
+.nav.active{background:linear-gradient(90deg,var(--pc-cyan),var(--pc-cyan-2));color:#fff;box-shadow:0 8px 20px rgba(17,184,230,.25)}
+.sep{background:rgba(255,255,255,.13)}
+.content{background:var(--pc-bg)}
+h1,h2,h3{color:var(--pc-text)}.muted{color:var(--pc-muted)}
+.panel,.stat{background:var(--pc-card);border:1px solid var(--pc-border);box-shadow:var(--pc-shadow)}
+.stat-icon{background:#e4f7fc;color:var(--pc-cyan-2)}
+button{border-color:#cddce3;color:#244454}button:hover{border-color:#8bd7eb;box-shadow:0 5px 14px rgba(6,40,61,.09)}
+button.primary{background:linear-gradient(135deg,var(--pc-cyan-2),var(--pc-cyan));border-color:var(--pc-cyan-2);box-shadow:0 7px 18px rgba(17,184,230,.20)}
+button.primary:hover{background:linear-gradient(135deg,#078fba,var(--pc-cyan-2))}
+input,select,textarea{border-color:#cddde4;background:#fcfeff;color:var(--pc-text)}
+input:focus,select:focus,textarea:focus{border-color:var(--pc-cyan);box-shadow:0 0 0 3px rgba(17,184,230,.13)}
+.patient-chip{background:#e4f7fc;color:#087fa7}.progress{background:#dce9ef}.progress>div{background:linear-gradient(90deg,var(--pc-cyan),var(--pc-cyan-2))}
+.status-pill{background:#e4f7fc;color:#087fa7}.session-grid>div,.info-grid>div{background:#f7fafc;border-color:#dfe8ed}
+.table-wrap thead{background:#edf5f8}.table-wrap th{color:#274c60}.table-wrap tr:hover td{background:#f5fafc}
+.back-button{background:var(--pc-navy);box-shadow:0 10px 25px rgba(6,40,61,.24)}.back-button:hover{background:var(--pc-cyan-2);color:#fff}
+.login{background:linear-gradient(135deg,#041d2d,#0b4b69)}
+#physio-update-banner{background:#fff!important;border:1px solid #cfe2ea!important;box-shadow:0 16px 36px rgba(6,40,61,.20)!important}
+#physio-update-btn{background:linear-gradient(135deg,var(--pc-cyan-2),var(--pc-cyan));color:#fff;border-color:var(--pc-cyan-2)}

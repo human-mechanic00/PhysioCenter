@@ -1,17 +1,30 @@
-# PhysioCenter — GitHub Auto Update
+# PhysioCenter — التحديث المباشر من GitHub
 
-1. Create a GitHub repository, for example: `PhysioCenter`.
-2. In `package.json`, replace:
-   - `YOUR_GITHUB_USERNAME` with your GitHub username.
-   - `PhysioCenter` with the exact repository name.
-3. Push the project to GitHub.
-4. The Windows GitHub Actions workflow builds the installer.
-5. For a real update, publish a GitHub Release with a higher semantic version (for example 1.0.1, 1.1.0).
-6. The installed app checks GitHub Releases and notifies the user.
-7. The updater downloads and installs the new app files only.
+## كيف يعمل؟
+- البرنامج المثبت يفحص GitHub Releases تلقائيًا بعد تشغيله.
+- إذا وجد إصدارًا أعلى من الإصدار المثبت، يظهر للمستخدم زر «تحديث البرنامج».
+- عند الضغط، ينزّل التحديث ثم يعيد تشغيل البرنامج لتثبيته.
+- قاعدة بيانات SQLite موجودة داخل مجلد userData، خارج ملفات التثبيت، لذلك لا يتم استبدال بيانات المرضى أثناء التحديث.
 
-IMPORTANT:
-- The SQLite database is stored in Electron's userData directory, outside the installed application files.
-- Updates do not replace that database.
-- Keep database migrations backward-compatible.
-- The app has `deleteAppDataOnUninstall=false`, so normal uninstall does not intentionally delete user data.
+## أول إصدار على GitHub
+1. ارفع محتويات المشروع إلى مستودع `human-mechanic00/PhysioCenter`.
+2. تأكد أن `package.json` يحتوي على الإصدار `1.0.2`.
+3. أنشئ Tag باسم `v1.0.2` وادفعه إلى GitHub.
+4. GitHub Actions سيبني ملف Windows وينشئ GitHub Release تلقائيًا ويرفع ملفات التحديث المطلوبة.
+
+## كل تحديث بعد ذلك
+مثال:
+- الإصدار الحالي: `1.0.2`
+- عدّل البرنامج.
+- غيّر `version` إلى `1.0.3`.
+- Commit ثم Tag: `v1.0.3`.
+- عند دفع الـTag، GitHub Actions يبني الإصدار وينشره تلقائيًا.
+- الأجهزة التي عليها `1.0.2` ستكتشف `1.0.3` وتعرض التحديث.
+
+## مهم جدًا
+- لا تغيّر `appId`.
+- لا تغيّر مكان قاعدة البيانات.
+- لا تحذف قاعدة البيانات عند التحديث.
+- يجب أن يكون رقم الإصدار الجديد أكبر من القديم.
+- لا تحتاج لعمل EXE يدويًا لكل تحديث.
+- لا يحتاج المستخدم إلى تحميل ZIP أو إعادة تثبيت البرنامج يدويًا.
